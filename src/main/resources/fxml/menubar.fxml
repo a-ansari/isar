@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<MenuBar nodeOrientation="RIGHT_TO_LEFT" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ir.isar.isarapp.ui.ctrl.MenubarController">
+    <menus>
+        <Menu text="فرمها">
+            <items>
+                <MenuItem onAction="#studentInfo" text="نمایش اطلاعات دانشجویان" />
+                <MenuItem onAction="#search" text="جستجوی دانشجویان" />
+                <SeparatorMenuItem />
+                <MenuItem onAction="#logout" text="ورود مجدد" />
+                <MenuItem onAction="#quit" text="خروج" />
+            </items>
+        </Menu>
+        <Menu text="بانک اطلاعاتی">
+            <items>
+                <MenuItem onAction="#importSqlServer" text="دریافت اطلاعات پایگاه داده قدیمی" />
+                <MenuItem onAction="#importExcel" text="دریافت اطلاعات از فایل اکسل" />
+            </items>
+        </Menu>
+        <Menu text="اطلاعات پایه">
+            <items>
+                <MenuItem onAction="#crudFields" text="اطلاعات رشته های تحصیلی" />
+                <MenuItem onAction="#crudTrends" text="اطلاعات گرایش های تحصیلی" />
+                <MenuItem onAction="#crudProfessors" text="اطلاعات اساتید راهنما" />
+            </items>
+        </Menu>
+        <Menu text="گزارشها">
+            <items>
+                <MenuItem onAction="#reportBonyad" text="گزارش بنیاد" />
+            </items>
+        </Menu>
+        <Menu text="امور مالی">
+            <items>
+                <MenuItem onAction="#paymentAction" text="دستور پرداخت" />
+            </items>
+        </Menu>
+        <Menu text="راهنما">
+            <items>
+                <MenuItem onAction="#about"  text="درباره برنامه" />
+            </items>
+        </Menu>
+    </menus>
+</MenuBar>
+

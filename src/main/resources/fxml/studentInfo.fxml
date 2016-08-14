@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="mainWindow" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ir.isar.isarapp.ui.ctrl.StudentInfoController">
+    <children>
+        <fx:include fx:id="menubar" source="menubar.fxml" />
+        <AnchorPane nodeOrientation="RIGHT_TO_LEFT" VBox.vgrow="ALWAYS" >
+            <children>
+                <!--
+                                    <GridPane hgap="4.0" vgap="6.0" BorderPane.alignment="CENTER">
+                                        <columnConstraints>
+                                            <ColumnConstraints halignment="RIGHT" percentWidth="14.0" />
+                                            <ColumnConstraints percentWidth="19.0" />
+                                            <ColumnConstraints halignment="RIGHT" percentWidth="14.0" />
+                                            <ColumnConstraints percentWidth="19.0" />
+                                            <ColumnConstraints halignment="RIGHT" percentWidth="14.0" />
+                                            <ColumnConstraints percentWidth="20.0" />
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints />
+                                        </rowConstraints>
+                                        <children>
+                                            <Label text="شماره دانشجویی" />
+                                            <Label text="نام" GridPane.columnIndex="2" />
+                                            <Label text="نام خانوادگی" GridPane.columnIndex="4" />
+                                            <TextField fx:id="txtStudentNumber1" onAction="#loadStudent" GridPane.columnIndex="1" />
+                                            <TextField fx:id="txtFirstName1" GridPane.columnIndex="3" />
+                                            <TextField fx:id="txtLastName1" GridPane.columnIndex="5" />
+                                        </children>
+                                    </GridPane>
+                -->
+                <Accordion cache="true" AnchorPane.topAnchor="8" AnchorPane.leftAnchor="8" AnchorPane.rightAnchor="8" AnchorPane.bottomAnchor="50" >
+                    <panes>
+                        <TitledPane fx:id="titStudentInfo" expanded="true" text="اطلاعات دانشجو" animated="false" >
+                            <content>
+                                <VBox spacing="0">
+                                    <GridPane hgap="4.0" vgap="6.0" BorderPane.alignment="CENTER">
+                                        <columnConstraints>
+                                            <ColumnConstraints halignment="RIGHT" percentWidth="14.0" />
+                                            <ColumnConstraints percentWidth="19.0" />
+                                            <ColumnConstraints halignment="RIGHT" percentWidth="14.0" />
+                                            <ColumnConstraints percentWidth="19.0" />
+                                            <ColumnConstraints halignment="RIGHT" percentWidth="14.0" />
+                                            <ColumnConstraints percentWidth="20.0" />
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints />
+                                            <RowConstraints />
+                                            <RowConstraints />
+                                            <RowConstraints />
+                                            <RowConstraints />
+                                            <RowConstraints />
+                                            <RowConstraints />
+                                            <RowConstraints />
+                                            <RowConstraints />
+                                            <RowConstraints />
+                                            <RowConstraints />
+                                            <RowConstraints />
+                                            <RowConstraints />
+                                        </rowConstraints>
+                                        <children>
+                                            <Label text="شماره دانشجویی" />
+                                            <Label text="نام" GridPane.columnIndex="2" />
+                                            <Label text="نام خانوادگی" GridPane.columnIndex="4" />
+                                            <Label text="کد ملی" GridPane.rowIndex="1" />
+                                            <Label text="شماره شناسنامه" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                            <Label text="تاریخ تولد" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                            <Label text="محل صدور شناسنامه" GridPane.rowIndex="2" />
+                                            <Label text="نام پدر" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                            <Label text="جنسیت" GridPane.rowIndex="3" />
+                                            <Label text="وضعیت تاهل" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                            <Label text="محل اخذ مدرک قبلی" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                            <Label text="نوع مدرک قبلی" GridPane.rowIndex="4" />
+                                            <Label text="معدل مدرک قبلی" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                            <Label text="سال اخذ مدرک قبلی" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                                            <Label text="سهمیه قبولی" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                                            <Label text="درصد جانبازی/اسارت" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                            <Label text="شماره پرونده بنیاد" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                                            <Label text="رتبه در سهمیه" GridPane.rowIndex="6" />
+                                            <Label text="رتبه کل" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                            <Label text="محل تشکیل پرونده" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                                            <Label text="سال ورود به دانشگاه" GridPane.rowIndex="7" />
+                                            <Label text="نوع تحصیل" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                                            <Label text="مقطع تحصیلی" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                                            <Label text="گروه تحصیلی" GridPane.rowIndex="8" />
+                                            <Label text="رشته تحصیلی" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                                            <Label text="گرایش" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+                                            <Label text="استاد مشاور" GridPane.rowIndex="9" />
+                                            <Label text="وضعیت تحصیلی" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                                            <Label text="اطلاعات تحصیلی" GridPane.columnIndex="4" GridPane.rowIndex="9" />
+                                            <Label text="آدرس پستی" GridPane.rowIndex="10" />
+                                            <Label text="شماره تلفن ثابت" GridPane.rowIndex="11" />
+                                            <Label text="شماره تلفن همراه" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+                                            <Label text="شماره تماس ضروری" GridPane.columnIndex="4" GridPane.rowIndex="11" />
+                                            <Label text="آدرس ایمیل" GridPane.rowIndex="12" />
+                                            <Label text="شماره حساب بانکی" GridPane.columnIndex="4" GridPane.rowIndex="12" />
+                                            <TextField fx:id="txtStudentNumber" onAction="#loadStudent" GridPane.columnIndex="1" />
+                                            <TextField fx:id="txtFirstName" GridPane.columnIndex="3" />
+                                            <TextField fx:id="txtLastName" GridPane.columnIndex="5" />
+                                            <TextField fx:id="txtNationalNumber" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                            <TextField fx:id="txtBirthCertNumber" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                            <TextField fx:id="txtBirthDate" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                                            <TextField fx:id="txtIssuePlace" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                            <TextField fx:id="txtFatherName" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                            <ComboBox fx:id="cmbGender" prefWidth="150.0" visibleRowCount="2" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                            <ComboBox fx:id="cmbMarriage" prefWidth="150.0" visibleRowCount="2" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                            <TextField fx:id="txtDiplomaPlace" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                                            <TextField fx:id="txtDiplomaType" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                            <TextField fx:id="txtDiplomaAverage" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                            <TextField fx:id="txtDiplomaYear" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                                            <ComboBox fx:id="cmbSegment" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                            <TextField fx:id="txtSegmentPercent" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                            <TextField fx:id="txtSegmentInfo" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                                            <TextField fx:id="txtSegmentRank" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                            <TextField fx:id="txtTotalRank" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                                            <TextField fx:id="txtSegmentPlace" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                                            <TextField fx:id="txtEntranceYear" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                            <ComboBox fx:id="cmbEducationalType" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                                            <ComboBox fx:id="cmbEducationalDegree" prefWidth="150.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                                            <ComboBox fx:id="cmbEducationalGroup" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                            <ComboBox fx:id="cmbEducationalField" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                                            <ComboBox fx:id="cmbEducationalTrend" prefWidth="150.0" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+                                            <ComboBox fx:id="cmbProfessor" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                            <ComboBox fx:id="cmbGraduationStatus" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                                            <TextField fx:id="txtGraduationInfo" GridPane.columnIndex="5" GridPane.rowIndex="9" />
+                                            <TextField fx:id="txtAddress" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="10" />
+                                            <TextField fx:id="txtPhoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                                            <TextField fx:id="txtMobileNumber" GridPane.columnIndex="3" GridPane.rowIndex="11" />
+                                            <TextField fx:id="txtEmergencyNumber" GridPane.columnIndex="5" GridPane.rowIndex="11" />
+                                            <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="12" />
+                                            <TextField fx:id="txtAccountNumber" GridPane.columnIndex="5" GridPane.rowIndex="12" />
+                                        </children>
+                                    </GridPane>
+                                </VBox>
+                            </content>
+                        </TitledPane>
+                        <TitledPane animated="true" expanded="false" onExpandedChange="#termExpanded" text="اطلاعات ترم">
+                            <content>
+                                <VBox spacing="8" >
+                                <TableView fx:id="tblTermInfo" BorderPane.alignment="CENTER">
+                                    <columns>
+                                        <TableColumn id="colTermNumber" fx:id="colTermNumber" text="شماره ترم" sortable="false" />
+                                        <TableColumn id="colTakenUnits" fx:id="colTakenUnits" text="واحد اخذ شده" sortable="false" />
+                                        <TableColumn id="colPassedUnits" fx:id="colPassedUnits" text="واحد گذرانده" sortable="false" />
+                                        <TableColumn id="colDeletedUnits" fx:id="colDeletedUnits" text="واحد حذف شده" sortable="false" />
+                                        <TableColumn id="colFailedUnits" fx:id="colFailedUnits" text="واحد مردودی" sortable="false" />
+                                        <TableColumn id="colUnspecifiedUnits" fx:id="colUnspecifiedUnits" text="واحد نامشخص" sortable="false" />
+                                        <TableColumn id="colZeroUnits" fx:id="colZeroUnits" text="واحد صفر" sortable="false" />
+                                        <TableColumn id="colTermAverage" fx:id="colTermAverage" text="معدل ترم" sortable="false" />
+                                        <TableColumn id="colTotalAverage" fx:id="colTotalAverage" text="معدل کل تا ترم" sortable="false" />
+                                        <TableColumn id="colTermStatus" fx:id="colTermStatus" text="وضعیت ترم" sortable="false" />
+                                    </columns>
+                                </TableView>
+                                <HBox>
+                                    <Button onAction="#deleteTerm" text="حذف ترم"/>
+                                </HBox>
+                <GridPane gridLinesVisible="true" BorderPane.alignment="CENTER" >
+                    <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" prefWidth="60" />
+                        <ColumnConstraints halignment="CENTER" prefWidth="90" />
+                        <ColumnConstraints halignment="CENTER" prefWidth="90" />
+                        <ColumnConstraints halignment="CENTER" prefWidth="95" />
+                        <ColumnConstraints halignment="CENTER" prefWidth="90" />
+                        <ColumnConstraints halignment="CENTER" prefWidth="90" />
+                        <ColumnConstraints halignment="CENTER" prefWidth="80" />
+                        <ColumnConstraints halignment="CENTER" prefWidth="80" />
+                        <ColumnConstraints halignment="CENTER" prefWidth="80" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="25.0" />
+                        <RowConstraints minHeight="25.0" />
+                    </rowConstraints>
+                    <children>
+                        <Label text="تعداد ترم" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <Label text="کل واحد اخذ شده" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        <Label text="کل واحد گذرانده" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                        <Label text="کل واحد حذف شده" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+                        <Label text="کل واحد مردودی" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+                        <Label text="کل واحد نامشخص" GridPane.columnIndex="5" GridPane.rowIndex="0"/>
+                        <Label text="کل واحد صفر" GridPane.columnIndex="6" GridPane.rowIndex="0"/>
+                        <Label text="معدل کل" GridPane.columnIndex="7" GridPane.rowIndex="0" />
+                        <Label text="تعداد مشروطی" GridPane.columnIndex="8" GridPane.rowIndex="0"/>
+
+                        <Label fx:id="lblUnitSumTotalTerms" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <Label fx:id="lblUnitSumTotalTaken" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="lblUnitSumTotalPassed" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Label fx:id="lblUnitSumTotalDeleted" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <Label fx:id="lblUnitSumTotalFailed" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                        <Label fx:id="lblUnitSumTotalUnspecified" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                        <Label fx:id="lblUnitSumTotalZero" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                        <Label fx:id="lblUnitSumTotalAverage" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                        <Label fx:id="lblUnitSumTotalConditional" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+                    </children>
+                </GridPane>
+                                </VBox>
+                            </content>
+                        </TitledPane>
+                        <TitledPane animated="true" expanded="false" text="اطلاعات پرداخت مالی">
+                            <content>
+                            <VBox spacing="8" >
+                            <TableView fx:id="tblPaymentInfo" BorderPane.alignment="CENTER">
+                                <columns>
+                                    <TableColumn fx:id="colPaymentTermNumber" text="شماره ترم" sortable="false" />
+                                    <TableColumn fx:id="colPaymentType" text="نوع پرداخت" sortable="false" />
+                                    <TableColumn fx:id="colPaymentAmount" text="میزان پرداخت" sortable="false" />
+                                </columns>
+                            </TableView>
+                            </VBox>
+                            </content>
+                        </TitledPane>
+                    </panes>
+                </Accordion>
+                <VBox AnchorPane.bottomAnchor="8" AnchorPane.leftAnchor="8">
+                <HBox spacing="8.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#update" text="بروز رسانی" />
+                        <Button mnemonicParsing="false" onAction="#clearAllFields" text="انصراف" />
+                        <Button mnemonicParsing="false" onAction="#delete" text="حذف دانشجو" />
+                        <Button mnemonicParsing="false" onAction="#print" text="چاپ" />
+                    </children>
+                </HBox>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>

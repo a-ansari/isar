@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ir.isar.isarapp.ui.ctrl.PaymentActionController">
+    <children>
+        <fx:include fx:id="menubar" source="menubar.fxml"/>
+        <VBox alignment="CENTER" VBox.vgrow="ALWAYS">
+            <VBox.margin>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </VBox.margin>
+            <children>
+                <GridPane alignment="CENTER" hgap="10" vgap="10">
+                    <Label text="نام تسهیلات" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <ComboBox fx:id="cmbPaymentType" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="200" />
+
+                    <Label text="دریافت کنندگان" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <ComboBox fx:id="cmbAppliedStudents" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="200" />
+
+                    <Label text="شماره ترم" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <TextField fx:id="txtTermNo" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="200" />
+                </GridPane>
+
+                <Button text="صدور دستور پرداخت" onAction="#action"  />
+            </children>
+        </VBox>
+    </children>
+</VBox>
