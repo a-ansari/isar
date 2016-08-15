@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.*?>
+
+
+<GridPane  xmlns:fx="http://javafx.com/fxml/1"  alignment="CENTER" hgap="10" vgap="10"   >
+     <stylesheets>
+        <URL value="@/styles/Styles.css" />
+     </stylesheets>
+     <padding> 
+         <javafx.geometry.Insets top="25" right="25" left="10" bottom="25" /> 
+     </padding>  
+     <Label text="شماره ترم:" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+     <TextField fx:id="termNumber" prefWidth="150.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+     <Label text="واحد اخذ شده:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+     <TextField fx:id="takenUnits" prefWidth="150.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+     <Label text="واحد گذرانده:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+     <TextField fx:id="passedUnits" prefWidth="150.0" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+     <Label text="واحد حذف شده:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+     <TextField fx:id="deletedUnits" prefWidth="150.0" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+     <Label text="واحد مردودی:" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+     <TextField fx:id="failedUnits" prefWidth="150.0" GridPane.columnIndex="0" GridPane.rowIndex="4" /> 
+     <Label text="واحد نامشخص:" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+     <TextField fx:id="unspecifiedUnits" prefWidth="150.0" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+     <Label text="واحد صفر:" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+     <TextField fx:id="zeroUnits" prefWidth="150.0" GridPane.columnIndex="0" GridPane.rowIndex="6" />  
+     <Label text="معدل ترم:" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+     <TextField fx:id="termAverage" prefWidth="150.0" GridPane.columnIndex="0" GridPane.rowIndex="7" /> 
+     <Label text="معدل کل:" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+     <TextField fx:id="totalAverage" prefWidth="150.0" GridPane.columnIndex="0" GridPane.rowIndex="8" /> 
+     <Label text="وضعیت ترم:" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+     <ComboBox  fx:id="termStatus" prefWidth="150.0" GridPane.columnIndex="0"  GridPane.rowIndex="9"  />   
+     <HBox spacing="10" alignment="BOTTOM_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="13" >  
+         <Button text="ذخیره" fx:id="SubmitButton" onAction="#SubmitButtonAction" />
+     </HBox>
+     <javafx.scene.text.Text fx:id="actiontarget" GridPane.columnIndex="1" GridPane.rowIndex="6"/>    
+
+ </GridPane>

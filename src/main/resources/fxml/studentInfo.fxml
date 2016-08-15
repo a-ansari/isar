@@ -159,8 +159,9 @@
                                         <TableColumn id="colTermStatus" fx:id="colTermStatus" text="وضعیت ترم" sortable="false" />
                                     </columns>
                                 </TableView>
-                                <HBox>
+                                 <HBox spacing="8.0">
                                     <Button onAction="#deleteTerm" text="حذف ترم"/>
+                                    <Button onAction="#addTerm" text="افزودن ترم"/>
                                 </HBox>
                 <GridPane gridLinesVisible="true" BorderPane.alignment="CENTER" >
                     <columnConstraints>

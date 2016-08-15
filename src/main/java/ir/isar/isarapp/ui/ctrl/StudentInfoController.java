@@ -20,11 +20,13 @@ import ir.isar.isarapp.entity.UnitSummary;
 import ir.isar.isarapp.model.PaymentModel;
 import ir.isar.isarapp.model.StudentModel;
 import ir.isar.isarapp.model.TermModel;
+import ir.isar.isarapp.model.TermModelCreate;
 import ir.isar.isarapp.util.ReflectionUtils;
 import ir.isar.isarapp.util.UiUtils;
 
 import java.awt.Desktop;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +37,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.print.PageLayout;
 import javafx.print.PageOrientation;
 import javafx.print.Paper;
@@ -42,6 +45,8 @@ import javafx.print.Printer;
 import javafx.print.PrinterJob;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
@@ -56,6 +61,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.VBox;
 import javafx.scene.transform.Scale;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.DefaultStringConverter;
 import javafx.util.converter.DoubleStringConverter;
@@ -434,7 +440,7 @@ public class StudentInfoController extends BaseController {
         loadExtraCombos(model);
         loadTermInfo(entity);
         loadSummaryInfo(entity);
-        addEmptyTermRow();
+        //addEmptyTermRow();
         loadPaymentInfo(entity);
     }
 
@@ -443,11 +449,28 @@ public class StudentInfoController extends BaseController {
         cmbMarriage.setValue(model.getMarriage());
     }
 
-    private void addEmptyTermRow() {
+    protected void addTermRow() {
         if (needAddEmptyRow()) {
-            tblTermInfo.getItems().add(new TermModel());
+            TermModel model = new TermModel();
+            model.setTermNumber(Integer.parseInt(TermModelCreate.termNumber.getValue()));
+            model.setTakenUnits(Integer.parseInt(TermModelCreate.takenUnits.getValue()));
+            model.setPassedUnits(Integer.parseInt(TermModelCreate.passedUnits.getValue()));
+            model.setDeletedUnits(Integer.parseInt(TermModelCreate.deletedUnits.getValue()));
+            model.setFailedUnits(Integer.parseInt(TermModelCreate.failedUnits.getValue()));
+            model.setUnspecifiedUnits(Integer.parseInt(TermModelCreate.unspecifiedUnits.getValue()));
+            model.setZeroUnits(Integer.parseInt(TermModelCreate.zeroUnits.getValue()));
+            model.setTermAverage(Double.parseDouble(TermModelCreate.termAverage.getValue()));
+            model.setTotalAverage(Double.parseDouble(TermModelCreate.totalAverage.getValue()));
+            model.setTermStatus(TermModelCreate.termStatus.getValue());
+            model.setDirty(true);
+            tblTermInfo.getItems().add(model);
         }
     }
+//    private void addEmptyTermRow() {
+//        if (needAddEmptyRow()) {
+//            tblTermInfo.getItems().add(new TermModel());
+//        }
+//    }
 
     private boolean needAddEmptyRow() {
         ObservableList<TermModel> items = tblTermInfo.getItems();
@@ -545,7 +568,7 @@ public class StudentInfoController extends BaseController {
             studentBiz.convertModelToEntity(model, entity);
             studentBiz.saveOrUpdateStudent(entity);
             updateTermInfo();
-            addEmptyTermRow();
+            //addEmptyTermRow();
         } catch (Exception ex) {
             logger.info("Exception in update student", ex);
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -674,4 +697,17 @@ public class StudentInfoController extends BaseController {
         tblTermInfo.getItems().remove(selectedItem);
         refreshSummaryInfo((Student) tblTermInfo.getUserData());
     }
+    
+     @FXML
+    //new
+    protected void addTerm() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/termModel.fxml"));         
+                fxmlLoader.setController(new TermModelController(this));
+                Parent root1 = (Parent) fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.setTitle("ترم");
+                stage.setScene(new Scene(root1));  
+                stage.show();
+}
+    //
 }
