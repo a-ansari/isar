@@ -690,16 +690,26 @@ public class StudentInfoController extends BaseController {
         if (selectedItem == null) {
             return;
         }
-        if (selectedItem.getId() != null) {
-            //maybe this item added recently and not persisted yet
-            termBiz.delete(selectedItem.getId());
-        }
-        tblTermInfo.getItems().remove(selectedItem);
-        refreshSummaryInfo((Student) tblTermInfo.getUserData());
+        //MHI
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setTitle(messages.getString("isar.StudentInfoController.deleteTerm"));
+        alert.setContentText(messages.getString("isar.StudentInfoController.deleteTermConfirmation"));
+        alert.showAndWait()
+                .filter(response -> response == ButtonType.OK)
+                .ifPresent(response -> {
+                      if (selectedItem.getId() != null) {
+                          //maybe this item added recently and not persisted yet
+                         termBiz.delete(selectedItem.getId());
+                      }
+                     tblTermInfo.getItems().remove(selectedItem);
+                     refreshSummaryInfo((Student) tblTermInfo.getUserData());
+                });
+      
     }
     
      @FXML
-    //new
+    //MHI
     protected void addTerm() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/termModel.fxml"));         
                 fxmlLoader.setController(new TermModelController(this));
@@ -709,5 +719,5 @@ public class StudentInfoController extends BaseController {
                 stage.setScene(new Scene(root1));  
                 stage.show();
 }
-    //
+    //E_MHI
 }
