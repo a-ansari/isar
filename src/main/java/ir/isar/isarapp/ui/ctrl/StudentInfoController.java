@@ -48,6 +48,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -223,7 +224,16 @@ public class StudentInfoController extends BaseController {
 
     @FXML
     private TextField txtAccountNumber;
+    //MHI
+     @FXML
+    private TextField termStudentNumber;
 
+    @FXML
+    private Label termFirstName;
+
+    @FXML
+    private Label termLastName;
+    //E_MHI
     @FXML
     private TableView<TermModel> tblTermInfo;
 
@@ -442,8 +452,21 @@ public class StudentInfoController extends BaseController {
         loadSummaryInfo(entity);
         //addEmptyTermRow();
         loadPaymentInfo(entity);
+        //MHI
+        termStudentNumber.setText(txtStudentNumber.getText());
+        termFirstName.setText(txtFirstName.getText());
+        termLastName.setText(txtLastName.getText());
+        
     }
-
+    
+    
+     @FXML
+    protected void termLoadStudent(ActionEvent event) {
+        txtStudentNumber.setText(termStudentNumber.getText());
+        loadStudent(event);
+    }
+    //E_MHI
+    
     private void loadExtraCombos(StudentModel model) {
         cmbGender.setValue(model.getGender());
         cmbMarriage.setValue(model.getMarriage());
@@ -691,11 +714,19 @@ public class StudentInfoController extends BaseController {
             return;
         }
         //MHI
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setHeaderText(null);
-        alert.setTitle(messages.getString("isar.StudentInfoController.deleteTerm"));
-        alert.setContentText(messages.getString("isar.StudentInfoController.deleteTermConfirmation"));
-        alert.showAndWait()
+        Alert deleteTermAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        deleteTermAlert.setHeaderText(null);
+        deleteTermAlert.setTitle(messages.getString("isar.StudentInfoController.deleteTerm"));
+        deleteTermAlert.setContentText(messages.getString("isar.StudentInfoController.deleteTermConfirmation"));
+         Button exitButton = (Button) deleteTermAlert.getDialogPane().lookupButton(
+                ButtonType.OK
+        );
+        Button cancelButton = (Button) deleteTermAlert.getDialogPane().lookupButton(
+                ButtonType.CANCEL
+        );
+        exitButton.setText(messages.getString("isar.StudentInfoController.yes"));
+        cancelButton.setText(messages.getString("isar.StudentInfoController.no"));
+        deleteTermAlert.showAndWait()
                 .filter(response -> response == ButtonType.OK)
                 .ifPresent(response -> {
                       if (selectedItem.getId() != null) {

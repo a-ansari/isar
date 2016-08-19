@@ -145,6 +145,14 @@
                         <TitledPane animated="true" expanded="false" onExpandedChange="#termExpanded" text="اطلاعات ترم">
                             <content>
                                 <VBox spacing="8" >
+                                    <GridPane  hgap="20" vgap="10">
+                                            <Label text="شماره دانشجویی :" />
+                                            <Label text="نام :" GridPane.columnIndex="2" />
+                                            <Label text=" نام خانوادگی :" GridPane.columnIndex="4" />
+                                            <TextField fx:id="termStudentNumber" prefWidth="100.0" onAction="#termLoadStudent" GridPane.columnIndex="1" />
+                                            <Label fx:id="termFirstName"  GridPane.columnIndex="3" />
+                                            <Label fx:id="termLastName"  GridPane.columnIndex="5" />                                       
+                                    </GridPane>
                                 <TableView fx:id="tblTermInfo" BorderPane.alignment="CENTER">
                                     <columns>
                                         <TableColumn id="colTermNumber" fx:id="colTermNumber" text="شماره ترم" sortable="false" />
