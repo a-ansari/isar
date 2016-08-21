@@ -119,7 +119,7 @@ public class ReportExcelBiz {
                     term = new Term();
                 }
                 values[i] = reflectionUtils.readValueFromModel(term, column.getField());
-            } if (column instanceof FacilityResultColumn) {
+            } else if (column instanceof FacilityResultColumn) {
                 Long studentNumber = Long.parseLong(student.getStudentNumber());
                 FacilityModel facilityModel = facilityBiz.calculateAllPayments(studentNumber);
                 values[i] = reflectionUtils.readValueFromModel(facilityModel, column.getField());
