@@ -46,6 +46,7 @@ public class MainApp extends Application {
 
         MainApp.stage = stage;
         stage.setTitle(messages.getString("isar.MainApp.title"));
+        stage.setMaximized(true);
         AppContextUtils.getBean(UiUtils.class).redirect("/fxml/login.fxml");
 
         stage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
