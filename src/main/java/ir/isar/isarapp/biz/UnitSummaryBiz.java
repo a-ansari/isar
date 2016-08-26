@@ -38,17 +38,18 @@ public class UnitSummaryBiz {
         int totalConditional = 0;
 
         for (Term term : termBiz.loadAllTerms(student)) {
-            if ((double) term.getTermAverage() != 0.0) {
-                totalAverage = ((totalAverage * totalTaken) + (term.getTermAverage() * term.getTakenUnits())) / (totalTaken + term.getTakenUnits());
+            if ( term.getTakenUnits() != 0) {
+                totalAverage = ((totalAverage * totalTaken) + (term.getTermAverage() * (term.getTakenUnits()-term.getUnspecifiedUnits()))) / (totalTaken + term.getTakenUnits()-term.getUnspecifiedUnits());
             }
-            totalTerms++;
+            if (!term.getTermStatus().equals(TermStatus.RemovedWithoutCounting))
+               totalTerms++;
             totalTaken += term.getTakenUnits();
             totalPassed += term.getPassedUnits();
             totalDeleted += term.getDeletedUnits();
             totalFailed += term.getFailedUnits();
             totalUnspecified += term.getUnspecifiedUnits();
             totalZero += term.getZeroUnits();
-            if (term.getTermStatus().equals(TermStatus.Conditional)) {
+            if (term.getTermStatus().equals(TermStatus.Conditional)&&(term.getTermNumber()%10!=3)) {
                 totalConditional++;
             }
         }
