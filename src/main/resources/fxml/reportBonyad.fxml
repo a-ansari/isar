@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ir.isar.isarapp.ui.ctrl.ReportBonyadController">
+<VBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="750.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ir.isar.isarapp.ui.ctrl.ReportBonyadController">
     <children>
         <fx:include fx:id="menubar" source="menubar.fxml"/>
         <VBox alignment="CENTER" VBox.vgrow="ALWAYS">

@@ -28,6 +28,8 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -266,7 +268,7 @@ public class StudentInfoController extends BaseController {
 
     @FXML
     private TableColumn<TermModel, String> colTermStatus;
-
+    
     @FXML
     private Label lblUnitSumTotalTerms;
 
@@ -293,6 +295,33 @@ public class StudentInfoController extends BaseController {
 
     @FXML
     private Label lblUnitSumTotalConditional;
+
+    @FXML
+    private Label lblUnitSumTotalTerms_Term;
+
+    @FXML
+    private Label lblUnitSumTotalTaken_Term;
+
+    @FXML
+    private Label lblUnitSumTotalPassed_Term;
+
+    @FXML
+    private Label lblUnitSumTotalDeleted_Term;
+
+    @FXML
+    private Label lblUnitSumTotalFailed_Term;
+
+    @FXML
+    private Label lblUnitSumTotalUnspecified_Term;
+
+    @FXML
+    private Label lblUnitSumTotalZero_Term;
+
+    @FXML
+    private Label lblUnitSumTotalAverage_Term;
+
+    @FXML
+    private Label lblUnitSumTotalConditional_Term;
 
     @FXML
     private TableView tblPaymentInfo;
@@ -452,7 +481,7 @@ public class StudentInfoController extends BaseController {
         loadSummaryInfo(entity);
         //addEmptyTermRow();
         loadPaymentInfo(entity);
-        //MHI
+    //MHI
         termStudentNumber.setText(txtStudentNumber.getText());
         termFirstName.setText(txtFirstName.getText());
         termLastName.setText(txtLastName.getText());
@@ -461,7 +490,7 @@ public class StudentInfoController extends BaseController {
     
     
      @FXML
-    protected void termLoadStudent(ActionEvent event) {
+    protected void loadStudent_inTermInfo(ActionEvent event) {
         txtStudentNumber.setText(termStudentNumber.getText());
         loadStudent(event);
     }
@@ -487,6 +516,8 @@ public class StudentInfoController extends BaseController {
             model.setTermStatus(TermModelCreate.termStatus.getValue());
             model.setDirty(true);
             tblTermInfo.getItems().add(model);
+            tblTermInfo.getItems().sort(new TermNumberComparator());
+            updateTermInfo();           
         }
     }
 //    private void addEmptyTermRow() {
@@ -539,6 +570,7 @@ public class StudentInfoController extends BaseController {
     void loadSummaryInfo(Student student) {
         try {
             UnitSummary unitSummary = student.getUnitSummary();
+            
             lblUnitSumTotalTerms.setText(unitSummary.getTotalTerms().toString());
             lblUnitSumTotalTaken.setText(unitSummary.getTotalTaken().toString());
             lblUnitSumTotalPassed.setText(unitSummary.getTotalPassed().toString());
@@ -548,6 +580,16 @@ public class StudentInfoController extends BaseController {
             lblUnitSumTotalZero.setText(unitSummary.getTotalZero().toString());
             lblUnitSumTotalAverage.setText(unitSummary.getTotalAverage().toString());
             lblUnitSumTotalConditional.setText(unitSummary.getTotalConditional().toString());
+            
+            lblUnitSumTotalTerms_Term.setText(unitSummary.getTotalTerms().toString());
+            lblUnitSumTotalTaken_Term.setText(unitSummary.getTotalTaken().toString());
+            lblUnitSumTotalPassed_Term.setText(unitSummary.getTotalPassed().toString());
+            lblUnitSumTotalDeleted_Term.setText(unitSummary.getTotalDeleted().toString());
+            lblUnitSumTotalFailed_Term.setText(unitSummary.getTotalFailed().toString());
+            lblUnitSumTotalUnspecified_Term.setText(unitSummary.getTotalUnspecified().toString());
+            lblUnitSumTotalZero_Term.setText(unitSummary.getTotalZero().toString());
+            lblUnitSumTotalAverage_Term.setText(unitSummary.getTotalAverage().toString());
+            lblUnitSumTotalConditional_Term.setText(unitSummary.getTotalConditional().toString());
         } catch (NullPointerException ex) {
         }
     }
@@ -750,5 +792,14 @@ public class StudentInfoController extends BaseController {
                 stage.setScene(new Scene(root1));  
                 stage.show();
 }
-    //E_MHI
+   
 }
+
+class TermNumberComparator implements Comparator<TermModel>{
+ 
+	@Override
+	public int compare(TermModel T1, TermModel T2) {
+		return T1.getTermNumber() - T2.getTermNumber();
+	}
+}
+ //E_MHI
