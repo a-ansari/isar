@@ -5,47 +5,36 @@
  */
 package ir.isar.isarapp.ui.ctrl;
 
-import ir.isar.isarapp.enm.GenderEnum;
-import ir.isar.isarapp.enm.MarriageEnum;
 import ir.isar.isarapp.model.TermModelCreate;
 import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import ir.isar.isarapp.dao.TermStatusDao;
+import ir.isar.isarapp.model.TermModel;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
-import javafx.util.converter.DefaultStringConverter;
-import javax.inject.Inject;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+import java.util.ResourceBundle;
+
+
 
 public class TermModelController implements Initializable {
     private  StudentInfoController studentInfo;
     private TermStatusDao termStatusDao;
-   
-//    @FXML
-//    private Label label;
-   TermModelController(StudentInfoController SI) {
+    private TableView<TermModel> tblTermInfo;
+    private final ResourceBundle messages = ResourceBundle.getBundle(getClass().getName());
+
+   TermModelController(StudentInfoController SI,TableView<TermModel> tblTermInfo) {
         this.studentInfo = SI;
         termStatusDao= new TermStatusDao();
+        this.tblTermInfo= tblTermInfo;
    }
-//    @FXML
-//    private Label label;
-//    
-//    @FXML
-//    private void SubmitButtonAction(ActionEvent event) {
-////        System.out.println("You clicked me!");
-////        label.setText("Hello World!");
-//    }
-//    
+
 //    @Override
 //    public void initialize(URL url, ResourceBundle rb) {
 //        // TODO
@@ -77,7 +66,21 @@ public class TermModelController implements Initializable {
     @FXML
    private void SubmitButtonAction(ActionEvent event) {
        
-        studentInfo.addTermRow();
+        int newTermNumber =Integer.parseInt(termNumber.getText());
+        for(TermModel term : tblTermInfo.getItems()){
+          if(term.getTermNumber()== newTermNumber){
+              Alert repetitiveTermAlert = new Alert(Alert.AlertType.WARNING);
+              repetitiveTermAlert.setHeaderText(null);
+              repetitiveTermAlert.setTitle(messages.getString("isar.TermModelController.repetitiveTerm"));
+              repetitiveTermAlert.setContentText(messages.getString("isar.TermModelController.repetitiveTermWarning"));
+               Button exitButton = (Button) repetitiveTermAlert.getDialogPane().lookupButton(ButtonType.OK);
+               exitButton.setText(messages.getString("isar.TermModelController.confirm"));
+              repetitiveTermAlert.showAndWait();
+
+              return;
+           }
+       }
+
         TermModelCreate.setTermNumber(termNumber.getText());
         TermModelCreate.setTakenUnits(takenUnits.getText());
         TermModelCreate.setPassedUnits(passedUnits.getText());
@@ -88,6 +91,7 @@ public class TermModelController implements Initializable {
         TermModelCreate.setTermAverage(termAverage.getText());
         TermModelCreate.setTotalAverage(totalAverage.getText());
         TermModelCreate.setTermStatus(termStatus.getValue());
+         studentInfo.addTermRow();
        // studentInfo.update(event);
         TermModelCreate.reset();
         Stage stage = (Stage) SubmitButton.getScene().getWindow();
@@ -107,7 +111,6 @@ public class TermModelController implements Initializable {
        zeroUnits.textProperty().bindBidirectional(TermModelCreate.zeroUnits);
        termAverage.textProperty().bindBidirectional(TermModelCreate.termAverage);
        totalAverage.textProperty().bindBidirectional(TermModelCreate.totalAverage);
-       // System.out.println(termStatusDao);
        termStatus.getItems().addAll(termStatusDao.loadAllValues());
      //  termStatus.getItems().addAll("نامشخص","عادی","مشروط","حذف ترم با احتساب سنوات","حذف ترم بدون احتساب سنوات");
        termStatus.valueProperty().bindBidirectional(TermModelCreate.termStatus);       

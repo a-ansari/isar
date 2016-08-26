@@ -784,8 +784,9 @@ public class StudentInfoController extends BaseController {
      @FXML
     //MHI
     protected void addTerm() throws IOException {
+         System.out.println(tblTermInfo.toString());
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/termModel.fxml"));         
-                fxmlLoader.setController(new TermModelController(this));
+                fxmlLoader.setController(new TermModelController(this,tblTermInfo));
                 Parent root1 = (Parent) fxmlLoader.load();
                 Stage stage = new Stage();
                 stage.setTitle("ترم");
