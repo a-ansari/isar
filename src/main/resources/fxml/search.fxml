@@ -23,7 +23,7 @@
                                 <Label text="عنوان فیلتر" />
                                 <ComboBox fx:id="cmbFilter" prefWidth="150.0"/>
                                 <ComboBox fx:id="cmbExpression" prefWidth="150.0"/>
-                                <VBox fx:id="paneValue" prefWidth="150.0" alignment="CENTER">
+                                <VBox spacing="8" fx:id="paneValue" prefWidth="150.0" alignment="CENTER">
                                     <TextField fx:id="txtValue" prefWidth="150.0" visible="false" />
                                     <org.controlsfx.control.CheckComboBox fx:id="ccbValue" prefWidth="150.0" visible="false"/>
                                 </VBox>
@@ -75,6 +75,84 @@
                                 -->
                             </columns>
                         </TableView>
+                        <!--MHI-->
+                        <HBox spacing="8" alignment="CENTER_LEFT">
+                            <Button onAction="#calculateAverage" text="محاسبه میانگین" />
+                            <!--<Button onAction="#calculateSum" text="محاسبه مجموع" />-->
+                         </HBox> 
+                         <GridPane fx:id="AverageGridPane" BorderPane.alignment="CENTER"  hgap="10.0" >
+                            <columnConstraints>
+                                <ColumnConstraints halignment="CENTER" />
+                                <ColumnConstraints halignment="CENTER" />
+                                <ColumnConstraints halignment="CENTER" />
+                                <ColumnConstraints halignment="CENTER" />
+                                <ColumnConstraints halignment="CENTER" />
+                                <ColumnConstraints halignment="CENTER" />
+                                <ColumnConstraints halignment="CENTER" />
+                                <ColumnConstraints halignment="CENTER" />
+                                <ColumnConstraints halignment="CENTER" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="25.0" />
+                                <RowConstraints minHeight="25.0" />
+                            </rowConstraints>
+                                        <children>
+                                            <Label fx:id="lblAverage" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                                            <Label fx:id="lblAverage1" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                                            <Label fx:id="lblAverage2" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                                            <Label fx:id="lblAverage3" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+                                            <Label fx:id="lblAverage4" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+                                            <Label fx:id="lblAverage5" GridPane.columnIndex="5" GridPane.rowIndex="0"/>
+                                            <Label fx:id="lblAverage6" GridPane.columnIndex="6" GridPane.rowIndex="0"/>
+                                            <Label fx:id="lblAverage7" GridPane.columnIndex="7" GridPane.rowIndex="0" />
+                                            <Label fx:id="lblAverage8" GridPane.columnIndex="8" GridPane.rowIndex="0"/>
+
+                                            <Label fx:id="lblAverageTitle" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                            <Label fx:id="lblResult1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                            <Label fx:id="lblResult2" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                            <Label fx:id="lblResult3" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                            <Label fx:id="lblResult4" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                            <Label fx:id="lblResult5" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                                            <Label fx:id="lblResult6" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                                            <Label fx:id="lblResult7" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                                            <Label fx:id="lblResult8" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+                                        </children>
+                                    </GridPane>
+<!--                         <HBox spacing="16" alignment="CENTER_LEFT">
+                               <VBox spacing="8">
+                                   <Label fx:id="lblAverage1"/>
+                                   <Label fx:id="lblResult1"/>
+                              </VBox> 
+                              <VBox spacing="8">
+                                   <Label textAlignment="CENTER" fx:id="lblAverage2"/>
+                                   <Label textAlignment="CENTER" fx:id="lblResult2"/>
+                              </VBox> 
+                              <VBox spacing="8">
+                                   <Label </alignment>fx:id="lblAverage3"/>
+                                   <Label fx:id="lblResult3"/>
+                              </VBox> 
+                              <VBox spacing="8">
+                                   <Label fx:id="lblAverage4"/>
+                                   <Label fx:id="lblResult4"/>
+                              </VBox> 
+                              <VBox spacing="8">
+                                   <Label fx:id="lblAverage5"/>
+                                   <Label fx:id="lblResult5"/>
+                              </VBox> 
+                               <VBox spacing="8">
+                                   <Label fx:id="lblAverage6"/>
+                                   <Label fx:id="lblResult6"/>
+                              </VBox> 
+                               <VBox spacing="8">
+                                   <Label fx:id="lblAverage7"/>
+                                   <Label fx:id="lblResult7"/>
+                              </VBox> 
+                               <VBox spacing="8">
+                                   <Label fx:id="lblAverage8"/>
+                                   <Label fx:id="lblResult8"/>
+                              </VBox> 
+                        </HBox> -->
+                        <!--MHI-->
                         </VBox>
                     </content>
                 </TitledPane>

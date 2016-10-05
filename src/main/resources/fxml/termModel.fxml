@@ -36,7 +36,7 @@
      <Label text="وضعیت ترم:" GridPane.columnIndex="1" GridPane.rowIndex="9" />
      <ComboBox  fx:id="termStatus" prefWidth="150.0" GridPane.columnIndex="0"  GridPane.rowIndex="9"  />   
      <HBox spacing="10" alignment="BOTTOM_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="13" >  
-         <Button text="ذخیره" fx:id="SubmitButton" onAction="#SubmitButtonAction" />
+         <Button text="ذخیره و بروزرسانی" fx:id="SubmitButton" onAction="#SubmitButtonAction" />
      </HBox>
      <javafx.scene.text.Text fx:id="actiontarget" GridPane.columnIndex="1" GridPane.rowIndex="6"/>    
 

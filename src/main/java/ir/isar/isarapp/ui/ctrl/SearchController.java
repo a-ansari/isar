@@ -25,6 +25,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+//import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ChangeListener;
@@ -62,6 +63,8 @@ import org.controlsfx.control.IndexedCheckModel;
  * @author User
  */
 public class SearchController extends BaseController {
+    
+    //private final ResourceBundle columnTitles = ResourceBundle.getBundle(SearchResultBiz.class.getName());
 
     @Inject
     private FilterBiz filterBiz;
@@ -125,6 +128,63 @@ public class SearchController extends BaseController {
 
     @FXML
     private CheckBox chkHasRowNumber;
+    
+    @FXML
+    private GridPane AverageGridPane;
+    
+    @FXML
+    private Label lblAverage;
+    
+    @FXML
+    private Label lblAverageTitle;
+    
+    @FXML
+    private Label lblAverage1;
+    
+    @FXML
+    private Label lblAverage2;
+    
+    @FXML
+    private Label lblAverage3;
+    
+    @FXML
+    private Label lblAverage4;
+    
+    @FXML
+    private Label lblAverage5;
+    
+    @FXML
+    private Label lblAverage6;
+     
+    @FXML
+    private Label lblAverage7;
+      
+    @FXML
+    private Label lblAverage8;
+    
+    @FXML
+    private Label lblResult1;
+    
+    @FXML
+    private Label lblResult2;
+    
+    @FXML
+    private Label lblResult3;
+    
+    @FXML
+    private Label lblResult4;
+    
+    @FXML
+    private Label lblResult5;
+    
+    @FXML
+    private Label lblResult6;
+     
+    @FXML
+    private Label lblResult7;
+      
+    @FXML
+    private Label lblResult8;
 
     private final SearchModel _model = new SearchModel();
 
@@ -386,6 +446,103 @@ public class SearchController extends BaseController {
             }
         });
     }
+    
+    @FXML
+    protected void calculateAverage(ActionEvent action) {
+        Label[] avgTitleLabels = {lblAverage1,lblAverage2,lblAverage3,lblAverage4,lblAverage5,lblAverage6,lblAverage7,lblAverage8};
+        Label[] avgResultLabels = {lblResult1,lblResult2,lblResult3,lblResult4,lblResult5,lblResult6,lblResult7,lblResult8};
+        Integer i = 0, j = 0;
+        Double sum = new Double(0);
+        Double average = new Double(0);
+        int termNumber;
+        for (Label label : avgTitleLabels) {
+            label.setText("");
+        }
+         for (Label label : avgResultLabels) {
+            label.setText("");
+        }
+        //AverageGridPane.setGridLinesVisible(true);
+        lblAverageTitle.setText("میانگین");
+        FilterAndResultModel fullModel = searchBiz.getFilterAndResultModel();
+        for (ResultColumn resultColumn : fullModel.getColumnList()) {
+            String field = resultColumn.getField(); 
+            switch(field){
+                case "totalTaken":
+                    for (Student student : fullModel.getResultList()) {
+                        sum += student.getUnitSummary().getTotalTaken();
+                     }
+                    average = sum / fullModel.getResultList().size();
+                    avgTitleLabels[i++].setText(resultColumn.toString());
+                    avgResultLabels[j++].setText(average.toString());
+                    sum = 0.0;
+                    break;
+                case "totalPassed":
+                     for (Student student : fullModel.getResultList()) {
+                        sum += student.getUnitSummary().getTotalPassed();
+                     }
+                    average = sum / fullModel.getResultList().size();
+                    avgTitleLabels[i++].setText(resultColumn.toString());
+                    avgResultLabels[j++].setText(average.toString());
+                    sum = 0.0;
+                    break;
+                case "totalAverage":
+                     for (Student student : fullModel.getResultList()) {
+                        sum += student.getUnitSummary().getTotalAverage();
+                     }
+                    average = sum / fullModel.getResultList().size();
+                    avgTitleLabels[i++].setText(resultColumn.toString());
+                    avgResultLabels[j++].setText(average.toString());
+                    sum = 0.0;
+                    break;
+                case "takenUnits":
+                    termNumber=Integer.parseInt(resultColumn.toString().substring(0, 3));
+                    for (Student student : fullModel.getResultList()) {
+                        for (Term term : student.getTerms()) {
+                            if(term.getTermNumber()==termNumber)
+                                sum += term.getTakenUnits();
+                        }
+                    }
+                    average = sum / fullModel.getResultList().size();
+                    avgTitleLabels[i++].setText(resultColumn.toString());
+                    avgResultLabels[j++].setText(average.toString());
+                    sum = 0.0;            
+                    break;
+                case "passedUnits":
+                    termNumber=Integer.parseInt(resultColumn.toString().substring(0, 3));
+                    for (Student student : fullModel.getResultList()) {
+                        for (Term term : student.getTerms()) {
+                            if(term.getTermNumber()==termNumber)
+                                sum += term.getPassedUnits();
+                        }
+                    }
+                    average = sum / fullModel.getResultList().size();
+                    avgTitleLabels[i++].setText(resultColumn.toString());
+                    avgResultLabels[j++].setText(average.toString());
+                    sum = 0.0;   
+                    break;    
+                case "termAverage":
+                    termNumber=Integer.parseInt(resultColumn.toString().substring(0, 3));
+                    for (Student student : fullModel.getResultList()) {
+                        for (Term term : student.getTerms()) {
+                            if(term.getTermNumber()==termNumber)
+                                sum += term.getTermAverage();
+                        }
+                    }
+                    average = sum / fullModel.getResultList().size();
+                    avgTitleLabels[i++].setText(resultColumn.toString());
+                    avgResultLabels[j++].setText(average.toString());
+                    sum = 0.0;   
+                    break;
+                default:
+                    break;           
+        }
+        }
+    }
+    
+//    @FXML
+//    protected void calculateSum(ActionEvent action) {
+//        
+//    }
 
     private void addDoubleClickEvent() {
         tblResultPanel.setRowFactory(tv -> {
