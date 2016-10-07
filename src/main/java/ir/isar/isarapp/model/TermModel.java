@@ -174,5 +174,5 @@ public class TermModel extends BaseModel<Term> {
     public void setTermStatus(String value) {
         this.termStatus.set(value);
     }
-
+    
 }

@@ -28,9 +28,11 @@ public class TermModelCreate {
     
     public static SimpleStringProperty termAverage = new SimpleStringProperty("0.0");
     
-    public static SimpleStringProperty totalAverage = new SimpleStringProperty("0.0");
+  //  public static SimpleStringProperty totalAverage = new SimpleStringProperty("0.0");
     
     public static SimpleStringProperty termStatus = new SimpleStringProperty("نامشخص");
+    
+    private static boolean updateAlert = true;
     
 //    public TermModelCreate() {
 //        this.termNumber = new SimpleStringProperty();
@@ -159,13 +161,13 @@ public class TermModelCreate {
         termAverage.set(value);
     }
 
-    public static String getTotalAverage() {
-        return totalAverage.get();
-    }
-
-    public static void setTotalAverage(String value) {
-        totalAverage.set(value);
-    }
+//    public static String getTotalAverage() {
+//        return totalAverage.get();
+//    }
+//
+//    public static void setTotalAverage(String value) {
+//        totalAverage.set(value);
+//    }
 
     public static String getTermStatus() {
         return termStatus.get();
@@ -173,6 +175,14 @@ public class TermModelCreate {
 
     public static void setTermStatus(String value) {
         termStatus.set(value);
+    }
+    
+     public static boolean getUpdateAlert() {
+        return updateAlert;
+    }
+
+    public static void setUpdateAlert(boolean value) {
+        updateAlert=value;
     }
     
      public static void reset() {
@@ -184,7 +194,8 @@ public class TermModelCreate {
         setUnspecifiedUnits("0");
         setZeroUnits("0");
         setTermAverage("0");
-        setTotalAverage("0");
+    //    setTotalAverage("0");
         setTermStatus(" ");
+        setUpdateAlert(true);
     }
 }

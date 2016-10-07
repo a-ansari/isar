@@ -201,7 +201,7 @@
                                             <TableColumn id="colUnspecifiedUnits" fx:id="colUnspecifiedUnits" text="واحد نامشخص" sortable="false" />
                                             <TableColumn id="colZeroUnits" fx:id="colZeroUnits" text="واحد صفر" sortable="false" />
                                             <TableColumn id="colTermAverage" fx:id="colTermAverage" text="معدل ترم" sortable="false" />
-                                            <TableColumn id="colTotalAverage" fx:id="colTotalAverage" text="معدل کل تا ترم" sortable="false" />
+                                            <TableColumn id="colTotalAverage" fx:id="colTotalAverage" text="معدل کل تا آخر این ترم" sortable="false" />
                                             <TableColumn id="colTermStatus" fx:id="colTermStatus" text="وضعیت ترم" sortable="false" />
                                         </columns>
                                     </TableView>
@@ -272,6 +272,7 @@
                         <Button mnemonicParsing="false" onAction="#clearAllFields" text="انصراف" />
                         <Button mnemonicParsing="false" onAction="#delete" text="حذف دانشجو" />
                         <Button mnemonicParsing="false" onAction="#print" text="چاپ" />
+                        <Label fx:id="status"/>                        
                     </children>
                 </HBox>
                 </VBox>

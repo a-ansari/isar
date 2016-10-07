@@ -34,12 +34,6 @@ public class TermModelController implements Initializable {
         termStatusDao= new TermStatusDao();
         this.tblTermInfo= tblTermInfo;
    }
-
-//    @Override
-//    public void initialize(URL url, ResourceBundle rb) {
-//        // TODO
-//    }  
-  
    
     @FXML
     private TextField termNumber;
@@ -57,8 +51,8 @@ public class TermModelController implements Initializable {
     private TextField zeroUnits;
     @FXML
     private TextField termAverage;
-    @FXML
-    private TextField totalAverage;
+//    @FXML
+//    private TextField totalAverage;
     @FXML
     private ComboBox<String> termStatus;
     @FXML
@@ -89,8 +83,9 @@ public class TermModelController implements Initializable {
         TermModelCreate.setUnspecifiedUnits(unspecifiedUnits.getText());
         TermModelCreate.setZeroUnits(zeroUnits.getText());
         TermModelCreate.setTermAverage(termAverage.getText());
-        TermModelCreate.setTotalAverage(totalAverage.getText());
+       // TermModelCreate.setTotalAverage(totalAverage.getText());
         TermModelCreate.setTermStatus(termStatus.getValue());
+        TermModelCreate.setUpdateAlert(false);
          studentInfo.addTermRow();
        // studentInfo.update(event);
         TermModelCreate.reset();
@@ -110,7 +105,7 @@ public class TermModelController implements Initializable {
        unspecifiedUnits.textProperty().bindBidirectional(TermModelCreate.unspecifiedUnits);
        zeroUnits.textProperty().bindBidirectional(TermModelCreate.zeroUnits);
        termAverage.textProperty().bindBidirectional(TermModelCreate.termAverage);
-       totalAverage.textProperty().bindBidirectional(TermModelCreate.totalAverage);
+//       totalAverage.textProperty().bindBidirectional(TermModelCreate.totalAverage);
        termStatus.getItems().addAll(termStatusDao.loadAllValues());
      //  termStatus.getItems().addAll("نامشخص","عادی","مشروط","حذف ترم با احتساب سنوات","حذف ترم بدون احتساب سنوات");
        termStatus.valueProperty().bindBidirectional(TermModelCreate.termStatus);       

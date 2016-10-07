@@ -31,11 +31,11 @@
      <TextField fx:id="zeroUnits" prefWidth="150.0" GridPane.columnIndex="0" GridPane.rowIndex="6" />  
      <Label text="معدل ترم:" GridPane.columnIndex="1" GridPane.rowIndex="7" />
      <TextField fx:id="termAverage" prefWidth="150.0" GridPane.columnIndex="0" GridPane.rowIndex="7" /> 
-     <Label text="معدل کل:" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-     <TextField fx:id="totalAverage" prefWidth="150.0" GridPane.columnIndex="0" GridPane.rowIndex="8" /> 
-     <Label text="وضعیت ترم:" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-     <ComboBox  fx:id="termStatus" prefWidth="150.0" GridPane.columnIndex="0"  GridPane.rowIndex="9"  />   
-     <HBox spacing="10" alignment="BOTTOM_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="13" >  
+<!--     <Label text="معدل کل:" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+     <TextField fx:id="totalAverage" prefWidth="150.0" GridPane.columnIndex="0" GridPane.rowIndex="8" /> -->
+     <Label text="وضعیت ترم:" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+     <ComboBox  fx:id="termStatus" prefWidth="150.0" GridPane.columnIndex="0"  GridPane.rowIndex="8"  />   
+     <HBox spacing="10" alignment="BOTTOM_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="12" >  
          <Button text="ذخیره و بروزرسانی" fx:id="SubmitButton" onAction="#SubmitButtonAction" />
      </HBox>
      <javafx.scene.text.Text fx:id="actiontarget" GridPane.columnIndex="1" GridPane.rowIndex="6"/>    

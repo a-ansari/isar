@@ -32,6 +32,9 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -65,6 +68,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.transform.Scale;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.util.StringConverter;
 import javafx.util.converter.DefaultStringConverter;
 import javafx.util.converter.DoubleStringConverter;
@@ -334,6 +338,9 @@ public class StudentInfoController extends BaseController {
 
     @FXML
     private TableColumn colPaymentAmount;
+    
+    @FXML
+    private Label status;
 
     private long oldStudentNumber;
 
@@ -485,7 +492,7 @@ public class StudentInfoController extends BaseController {
         termStudentNumber.setText(txtStudentNumber.getText());
         termFirstName.setText(txtFirstName.getText());
         termLastName.setText(txtLastName.getText());
-        
+        TermModelCreate.setUpdateAlert(false);
     }
     
     
@@ -512,11 +519,14 @@ public class StudentInfoController extends BaseController {
             model.setUnspecifiedUnits(Integer.parseInt(TermModelCreate.unspecifiedUnits.getValue()));
             model.setZeroUnits(Integer.parseInt(TermModelCreate.zeroUnits.getValue()));
             model.setTermAverage(Double.parseDouble(TermModelCreate.termAverage.getValue()));
-            model.setTotalAverage(Double.parseDouble(TermModelCreate.totalAverage.getValue()));
+           // model.setTotalAverage(Double.parseDouble(TermModelCreate.totalAverage.getValue()));
             model.setTermStatus(TermModelCreate.termStatus.getValue());
+            termBiz.calculateTotalAverage(model,tblTermInfo);
             model.setDirty(true);
             tblTermInfo.getItems().add(model);
             tblTermInfo.getItems().sort(new TermNumberComparator());
+            for(TermModel term:tblTermInfo.getItems())
+                termBiz.calculateTotalAverage(term,tblTermInfo);
             updateTermInfo();           
         }
     }
@@ -621,6 +631,17 @@ public class StudentInfoController extends BaseController {
                 entity = studentBiz.loadStudent(oldStudentNumber);
                 entity.setStudentNumber(studentNo);
             } else {
+                if(TermModelCreate.getUpdateAlert()){
+                  Alert updateAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                  updateAlert.setHeaderText(null);
+                  updateAlert.setTitle(messages.getString("isar.StudentInfoController.updateAlert.title"));
+                  updateAlert.setContentText(messages.getString("isar.StudentInfoController.updateAlert.message"));
+                  Button exitButton = (Button) updateAlert.getDialogPane().lookupButton(ButtonType.OK);
+                  Button cancelButton = (Button) updateAlert.getDialogPane().lookupButton(ButtonType.CANCEL);
+                  exitButton.setText(messages.getString("isar.StudentInfoController.updateAlert.yes"));
+                  cancelButton.setText(messages.getString("isar.StudentInfoController.updateAlert.cancel"));
+                  updateAlert.showAndWait();
+                }
                 entity = studentBiz.loadStudent(studentNo);
             }
             oldStudentNumber = studentNo;
@@ -634,6 +655,11 @@ public class StudentInfoController extends BaseController {
             studentBiz.saveOrUpdateStudent(entity);
             updateTermInfo();
             //addEmptyTermRow();
+            
+            Timeline timeline = new Timeline();
+            status.setText("   بروز شد ...");        
+            timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1), new KeyValue(status.textProperty(), "")));
+            timeline.play();
         } catch (Exception ex) {
             logger.info("Exception in update student", ex);
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -784,7 +810,7 @@ public class StudentInfoController extends BaseController {
      @FXML
     //MHI
     protected void addTerm() throws IOException {
-         System.out.println(tblTermInfo.toString());
+        // System.out.println(tblTermInfo.toString());
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/termModel.fxml"));         
                 fxmlLoader.setController(new TermModelController(this,tblTermInfo));
                 Parent root1 = (Parent) fxmlLoader.load();

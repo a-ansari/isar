@@ -462,7 +462,7 @@ public class SearchController extends BaseController {
             label.setText("");
         }
         //AverageGridPane.setGridLinesVisible(true);
-        lblAverageTitle.setText("میانگین");
+        lblAverageTitle.setText("میانگین:");
         FilterAndResultModel fullModel = searchBiz.getFilterAndResultModel();
         for (ResultColumn resultColumn : fullModel.getColumnList()) {
             String field = resultColumn.getField(); 

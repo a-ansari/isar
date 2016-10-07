@@ -6,6 +6,7 @@ import ir.isar.isarapp.entity.Term;
 import ir.isar.isarapp.excp.DataValidationException;
 import ir.isar.isarapp.model.TermModel;
 import java.util.List;
+import javafx.scene.control.TableView;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -47,6 +48,20 @@ public class TermBiz {
 
     public void delete(Long id) {
         termDao.deleteById(id);
+    }
+    
+     public void calculateTotalAverage(TermModel model,TableView<TermModel> tblTermInfo){
+        double sum = model.getTermAverage()*(model.getTakenUnits()-model.getUnspecifiedUnits());
+        double average;           
+        int units= model.getTakenUnits()-model.getUnspecifiedUnits();
+        for(TermModel term:tblTermInfo.getItems())
+            if(term.getTermNumber()<model.getTermNumber()){
+                sum += term.getTermAverage() * (term.getTakenUnits()-term.getUnspecifiedUnits());
+                units += term.getTakenUnits()-term.getUnspecifiedUnits(); 
+            }
+        average = sum/units;
+        average = Math.round(average * 100.0) / 100.0;
+        model.setTotalAverage(average);
     }
 
 }
