@@ -559,6 +559,8 @@ public class StudentInfoController extends BaseController {
     private void loadTermInfo(Student student) {
         ObservableList<TermModel> termObservableList = FXCollections.observableList(getTermModelList(student));
         tblTermInfo.setItems(termObservableList);
+        for(TermModel term:tblTermInfo.getItems())
+            termBiz.calculateTotalAverage(term,tblTermInfo);
     }
 
     private List<PaymentModel> getPaymentModelList(Student student) {
