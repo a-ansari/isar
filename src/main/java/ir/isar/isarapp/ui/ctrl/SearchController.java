@@ -455,6 +455,7 @@ public class SearchController extends BaseController {
         Double sum = new Double(0);
         Double average = new Double(0);
         int termNumber;
+        int numberOfStudents=0;
         for (Label label : avgTitleLabels) {
             label.setText("");
         }
@@ -498,40 +499,49 @@ public class SearchController extends BaseController {
                     termNumber=Integer.parseInt(resultColumn.toString().substring(0, 3));
                     for (Student student : fullModel.getResultList()) {
                         for (Term term : student.getTerms()) {
-                            if(term.getTermNumber()==termNumber)
+                            if(term.getTermNumber()==termNumber){
                                 sum += term.getTakenUnits();
+                                numberOfStudents++;
+                            }
                         }
                     }
-                    average = sum / fullModel.getResultList().size();
+                    average = sum / numberOfStudents;
                     avgTitleLabels[i++].setText(resultColumn.toString());
                     avgResultLabels[j++].setText(average.toString());
-                    sum = 0.0;            
+                    sum = 0.0;  
+                    numberOfStudents = 0;
                     break;
                 case "passedUnits":
                     termNumber=Integer.parseInt(resultColumn.toString().substring(0, 3));
                     for (Student student : fullModel.getResultList()) {
                         for (Term term : student.getTerms()) {
-                            if(term.getTermNumber()==termNumber)
+                            if(term.getTermNumber()==termNumber){
                                 sum += term.getPassedUnits();
+                                numberOfStudents++;
+                            }
                         }
                     }
-                    average = sum / fullModel.getResultList().size();
+                    average = sum / numberOfStudents;
                     avgTitleLabels[i++].setText(resultColumn.toString());
                     avgResultLabels[j++].setText(average.toString());
                     sum = 0.0;   
+                    numberOfStudents = 0;
                     break;    
                 case "termAverage":
                     termNumber=Integer.parseInt(resultColumn.toString().substring(0, 3));
                     for (Student student : fullModel.getResultList()) {
                         for (Term term : student.getTerms()) {
-                            if(term.getTermNumber()==termNumber)
+                            if(term.getTermNumber()==termNumber){
                                 sum += term.getTermAverage();
+                                numberOfStudents++;
+                            }
                         }
                     }
-                    average = sum / fullModel.getResultList().size();
+                    average = sum / numberOfStudents;
                     avgTitleLabels[i++].setText(resultColumn.toString());
                     avgResultLabels[j++].setText(average.toString());
                     sum = 0.0;   
+                    numberOfStudents = 0;
                     break;
                 default:
                     break;           
