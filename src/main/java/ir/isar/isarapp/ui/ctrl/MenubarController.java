@@ -5,9 +5,13 @@ import ir.isar.isarapp.ui.crud.CrudFieldsController;
 import ir.isar.isarapp.ui.crud.CrudProfessorsController;
 import ir.isar.isarapp.ui.crud.CrudTrendsController;
 import ir.isar.isarapp.util.UiUtils;
+import java.util.Optional;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.stage.Modality;
 import javax.inject.Inject;
 
 /**
@@ -45,8 +49,24 @@ public class MenubarController extends BaseController {
     }
     
     @FXML
-    protected void quit(ActionEvent event) {
-        MainApp.stage().close();
+    protected void quit(ActionEvent event) {        
+        Alert deleteTermAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        deleteTermAlert.setHeaderText(null);
+        deleteTermAlert.setTitle(messages.getString("isar.MenubarController.ExitAlert.title"));
+        deleteTermAlert.setContentText(messages.getString("isar.MenubarController.ExitAlert.text"));
+         Button exitButton = (Button) deleteTermAlert.getDialogPane().lookupButton(
+                ButtonType.OK
+        );
+        Button cancelButton = (Button) deleteTermAlert.getDialogPane().lookupButton(
+                ButtonType.CANCEL
+        );
+        exitButton.setText(messages.getString("isar.MenubarController.ExitAlert.yes"));
+        cancelButton.setText(messages.getString("isar.MenubarController.ExitAlert.no"));
+        deleteTermAlert.showAndWait()
+                .filter(response -> response == ButtonType.OK)
+                .ifPresent(response -> {
+                    MainApp.stage().close();
+                });
     }
     
     @FXML

@@ -788,13 +788,13 @@ public class StudentInfoController extends BaseController {
         deleteTermAlert.setHeaderText(null);
         deleteTermAlert.setTitle(messages.getString("isar.StudentInfoController.deleteTerm"));
         deleteTermAlert.setContentText(messages.getString("isar.StudentInfoController.deleteTermConfirmation"));
-         Button exitButton = (Button) deleteTermAlert.getDialogPane().lookupButton(
+         Button yesButton = (Button) deleteTermAlert.getDialogPane().lookupButton(
                 ButtonType.OK
         );
         Button cancelButton = (Button) deleteTermAlert.getDialogPane().lookupButton(
                 ButtonType.CANCEL
         );
-        exitButton.setText(messages.getString("isar.StudentInfoController.yes"));
+        yesButton.setText(messages.getString("isar.StudentInfoController.yes"));
         cancelButton.setText(messages.getString("isar.StudentInfoController.no"));
         deleteTermAlert.showAndWait()
                 .filter(response -> response == ButtonType.OK)

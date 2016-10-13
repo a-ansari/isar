@@ -35,6 +35,7 @@ public class ProfessorDao extends BaseDao<Professor> {
 
     public List<String> loadAllValues(String field, String group) {
         List<String> result = new ArrayList<>();
+        result.add("نامشخص");
         for (Professor prof : loadAll(field, group)) {
             result.add(prof.getValue());
         }
