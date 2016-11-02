@@ -18,6 +18,7 @@ import ir.isar.isarapp.filter.result.TermSpecificResultColumn;
 import ir.isar.isarapp.model.FilterAndResultModel;
 import ir.isar.isarapp.model.SearchModel;
 import ir.isar.isarapp.model.StudentFullModel;
+import ir.isar.isarapp.model.TermModel;
 import ir.isar.isarapp.util.ConversionUtils;
 import ir.isar.isarapp.util.ReflectionUtils;
 import ir.isar.isarapp.util.UiUtils;
@@ -30,8 +31,11 @@ import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.Cursor;
@@ -48,7 +52,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -113,6 +119,15 @@ public class SearchController extends BaseController {
 
     @FXML
     private Label lblTermNo;
+    
+    @FXML
+    private TableColumn colFilter;
+    
+    @FXML
+    private TableColumn colExpression;
+     
+    @FXML
+    private TableColumn colValue;
 
     @FXML
     private Pane paneValue;
@@ -309,6 +324,38 @@ public class SearchController extends BaseController {
 
         tblFilterPanel.getItems().add(_model.clone());
         _model.clear();
+//         EventHandler cellEditHandler = event -> {
+//            TableColumn.CellEditEvent cellEditEvent = (TableColumn.CellEditEvent) event;
+//            if (cellEditEvent.getNewValue().equals(cellEditEvent.getOldValue())) {
+//                return;
+//            }
+//            TermModel model = (TermModel) cellEditEvent.getRowValue();
+//            model.setDirty(true);
+//
+//            String columnId = cellEditEvent.getTableColumn().getId();
+//            String fieldName = uiUtils.extractNameFromWidget(columnId);
+//            reflectionUtils.writeValueToModel(model, fieldName, cellEditEvent.getNewValue());
+//        };
+//        tblFilterPanel.setEditable(true);
+//          for (TableColumn column : tblTermInfo.getColumns()) {
+//            String fieldName = uiUtils.extractNameFromWidget(column.getId());
+//            column.setCellValueFactory(new PropertyValueFactory(fieldName));
+//            column.addEventHandler(TableColumn.editCommitEvent(), cellEditHandler);
+//        }
+//        Object x=colFilter.cellValueFactoryProperty();
+//        System.out.println(x);
+//        ObservableList<String> termStatusValues = FXCollections.observableArrayList(termStatusDao.loadAllValues());
+
+//        colFilter.setCellFactory(TextFieldTableCell.forTableColumn(integerConverter));
+//        colExpression.setCellFactory(TextFieldTableCell.forTableColumn(integerConverter));
+//        colPassedUnits.setCellFactory(TextFieldTableCell.forTableColumn(integerConverter));
+//        colDeletedUnits.setCellFactory(TextFieldTableCell.forTableColumn(integerConverter));
+//        colFailedUnits.setCellFactory(TextFieldTableCell.forTableColumn(integerConverter));
+//        colUnspecifiedUnits.setCellFactory(TextFieldTableCell.forTableColumn(integerConverter));
+//        colZeroUnits.setCellFactory(TextFieldTableCell.forTableColumn(integerConverter));
+//        colTermAverage.setCellFactory(TextFieldTableCell.forTableColumn(doubleConverter));
+//        colTotalAverage.setCellFactory(TextFieldTableCell.forTableColumn(doubleConverter));
+//        colValue.setCellFactory(ComboBoxTableCell.forTableColumn(stringConverter, termStatusValues));
     }
 
     @FXML
@@ -469,19 +516,19 @@ public class SearchController extends BaseController {
             String field = resultColumn.getField(); 
             switch(field){
                 case "totalTaken":
-                    for (Student student : fullModel.getResultList()) {
+                    for (Student student : fullModel.getResultList()) 
                         sum += student.getUnitSummary().getTotalTaken();
-                     }
                     average = sum / fullModel.getResultList().size();
+                    average = Math.round(average * 100.0) / 100.0;
                     avgTitleLabels[i++].setText(resultColumn.toString());
                     avgResultLabels[j++].setText(average.toString());
                     sum = 0.0;
                     break;
                 case "totalPassed":
-                     for (Student student : fullModel.getResultList()) {
+                     for (Student student : fullModel.getResultList()) 
                         sum += student.getUnitSummary().getTotalPassed();
-                     }
                     average = sum / fullModel.getResultList().size();
+                    average = Math.round(average * 100.0) / 100.0;
                     avgTitleLabels[i++].setText(resultColumn.toString());
                     avgResultLabels[j++].setText(average.toString());
                     sum = 0.0;
@@ -491,6 +538,7 @@ public class SearchController extends BaseController {
                         sum += student.getUnitSummary().getTotalAverage();
                      }
                     average = sum / fullModel.getResultList().size();
+                    average = Math.round(average * 100.0) / 100.0;
                     avgTitleLabels[i++].setText(resultColumn.toString());
                     avgResultLabels[j++].setText(average.toString());
                     sum = 0.0;
@@ -506,6 +554,7 @@ public class SearchController extends BaseController {
                         }
                     }
                     average = sum / numberOfStudents;
+                    average = Math.round(average * 100.0) / 100.0;
                     avgTitleLabels[i++].setText(resultColumn.toString());
                     avgResultLabels[j++].setText(average.toString());
                     sum = 0.0;  
@@ -522,6 +571,7 @@ public class SearchController extends BaseController {
                         }
                     }
                     average = sum / numberOfStudents;
+                    average = Math.round(average * 100.0) / 100.0;
                     avgTitleLabels[i++].setText(resultColumn.toString());
                     avgResultLabels[j++].setText(average.toString());
                     sum = 0.0;   
@@ -538,10 +588,20 @@ public class SearchController extends BaseController {
                         }
                     }
                     average = sum / numberOfStudents;
+                    average = Math.round(average * 100.0) / 100.0;
                     avgTitleLabels[i++].setText(resultColumn.toString());
                     avgResultLabels[j++].setText(average.toString());
                     sum = 0.0;   
                     numberOfStudents = 0;
+                    break;
+                case "totalConditional":
+                    for (Student student : fullModel.getResultList()) 
+                       sum += student.getUnitSummary().getTotalConditional();
+                    average = sum / fullModel.getResultList().size();
+                    average = Math.round(average * 100.0) / 100.0;
+                    avgTitleLabels[i++].setText(resultColumn.toString());
+                    avgResultLabels[j++].setText(average.toString());
+                    sum = 0.0;
                     break;
                 default:
                     break;           
